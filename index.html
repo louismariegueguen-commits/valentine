@@ -1,61 +1,67 @@
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Une question pour toi...</title>
+<title>Question très importante 💖</title>
 
 <style>
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ffe6e6, #ffccd9);
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(270deg, #ff9a9e, #fad0c4);
+    background-size: 400% 400%;
+    animation: gradient 8s ease infinite;
+    min-height: 100svh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100svh;
-    margin: 0;
-    text-align: center;
+    overflow: hidden;
+}
+
+@keyframes gradient {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
 }
 
 .container {
-    position: relative;
+    text-align: center;
     padding: 20px;
+    position: relative;
 }
 
 h1 {
+    font-size: 2.2rem;
     color: #d63384;
-    font-size: 2rem;
-    animation: whisper 4s infinite ease-in-out;
+    margin-bottom: 15px;
 }
 
-@keyframes whisper {
-    0%,100% { opacity: 1; transform: translateY(0px); }
-    50% { opacity: 0.6; transform: translateY(-10px); }
+.subtitle {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 30px;
 }
 
 button {
-    padding: 15px 30px;
+    padding: 15px 35px;
     font-size: 1.3rem;
     border: none;
     border-radius: 50px;
     font-weight: bold;
     cursor: pointer;
-    transition: transform .2s ease;
-}
-
-button:active {
-    transform: scale(1.2);
 }
 
 #btnYes {
     background: #28a745;
     color: white;
-    box-shadow: 0px 6px 12px rgba(40,167,69,0.4);
-    animation: pulse 2s infinite;
+    animation: pulse 1.5s infinite;
 }
 
 @keyframes pulse {
-    0%,100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
 }
 
 #btnNo {
@@ -63,58 +69,28 @@ button:active {
     color: white;
     position: absolute;
 }
+
+#emoji {
+    font-size: 3rem;
+    margin-top: 20px;
+}
+
+#result {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+#result img {
+    max-width: 90%;
+    border-radius: 20px;
+    margin-top: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
 </style>
 </head>
 
 <body>
-<div class="container" id="questionPage">
-    <h1>Veux-tu être ma Valentine ? 💘</h1>
 
-    <audio id="trollSound" src="https://actions.google.com/sounds/v1/cartoon/slide_whistle_to_drum_hit.ogg"></audio>
-
-    <div class="buttons">
-        <button id="btnYes" onclick="showSuccess()">OUI !</button>
-        <button id="btnNo">Non</button>
-    </div>
-</div>
-
-<div class="container" id="resultPage" style="display:none; flex-direction:column;">
-    <h1>Tu as dit OUI ! 🎉</h1>
-    <p style="font-size:1.2rem;color:#555;">Alors rendez-vous à <strong>Disneyland Paris</strong> ❤️</p>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<script>
-const btnNo = document.getElementById("btnNo");
-const btnYes = document.getElementById("btnYes");
-const trollSound = document.getElementById("trollSound");
-
-btnNo.addEventListener("touchstart", moveButton);
-btnNo.addEventListener("click", moveButton);
-
-function moveButton() {
-    trollSound.play(); // son troll
-
-    // vibration mobile (si support)
-    if (navigator.vibrate) navigator.vibrate(200);
-
-    // shake animation rapide
-    btnNo.style.animation = "shake 0.2s";
-    setTimeout(() => btnNo.style.animation = "", 200);
-
-    // téléportation
-    const w = window.innerWidth - btnNo.offsetWidth - 20;
-    const h = window.innerHeight - btnNo.offsetHeight - 20;
-    btnNo.style.left = Math.random()*w + "px";
-    btnNo.style.top = Math.random()*h + "px";
-}
-
-function showSuccess() {
-    document.getElementById('questionPage').style.display = 'none';
-    document.getElementById('resultPage').style.display = 'flex';
-
-    confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
-}
-</script>
-</body>
-</html>
+<div class="container" id="question">
+    <h1>Veux-tu être ma Valentine ? 💘
